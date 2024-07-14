@@ -25,7 +25,6 @@ router.get('/:id', async (req, res) => {
   // be sure to include its associated Product data
   try {
     const tagData = await Tag.findByPk(req.params.id, {
-      attributes: ["id", "tag_name"],
       include: [{ model: Product}]
     });
     if (!tagData) {
@@ -77,7 +76,7 @@ router.delete("/:id", async (req, res) => {
       return;
     }
     res.status(200).json(tagData);
-  } catch {
+  } catch (err){
     res.status(500).json(err);
   }
 });
